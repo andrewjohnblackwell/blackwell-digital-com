@@ -5,7 +5,7 @@ import { SectionContainer } from '@/components/layout/section-container'
 import { ScrollReveal } from '@/components/sections/scroll-reveal'
 import { Card, CardContent } from '@/components/ui/card'
 import { ContactForm } from '@/components/contact-form'
-import { CalendlyEmbed } from '@/components/calendly-embed'
+
 import { createMetadata } from '@/lib/metadata'
 import { localBusinessSchema } from '@/lib/schema'
 import { NAP, SOCIAL_LINKS } from '@/lib/constants'
@@ -66,40 +66,7 @@ export default function ContactPage() {
         </p>
       </Hero>
 
-      {/* Block 2: Calendly */}
-      <SectionContainer>
-        <ScrollReveal>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-fg-primary text-center mb-6">
-            Book a Strategy Call
-          </h2>
-          <p className="text-fg-secondary text-base md:text-lg leading-relaxed text-center max-w-2xl mx-auto mb-6">
-            The strategy call is 30 minutes. Here&apos;s what we&apos;ll cover:
-          </p>
-          <ul className="space-y-3 max-w-xl mx-auto mb-10">
-            {[
-              'Your current business challenges and goals',
-              'A quick assessment of your AI maturity (or a review of your QuickScan results if you\'ve taken it)',
-              'An honest recommendation on whether — and how — Blackwell can help',
-              'Clear next steps, no matter what you decide',
-            ].map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 text-fg-secondary text-sm md:text-base"
-              >
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
-          <p className="text-fg-tertiary text-sm text-center mb-8">
-            <strong className="text-fg-secondary">Who should attend:</strong> The person who owns
-            the decision — typically the CEO, COO, or head of the initiative.
-          </p>
-          <CalendlyEmbed />
-        </ScrollReveal>
-      </SectionContainer>
-
-      {/* Block 3: Contact Form */}
+      {/* Block 2: Contact Form */}
       <SectionContainer>
         <div className="max-w-2xl mx-auto">
           <ScrollReveal>
