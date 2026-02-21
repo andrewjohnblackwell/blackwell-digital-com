@@ -55,8 +55,6 @@ const VALUES = [
   },
 ]
 
-// Populate when credentials/recognition are available
-const TRUST_SIGNALS: { label: string; description: string }[] = []
 
 export default function AboutPage() {
   return (
@@ -154,30 +152,7 @@ export default function AboutPage() {
         </div>
       </SectionContainer>
 
-      {/* Block 6: Trust Signals — omitted when empty */}
-      {TRUST_SIGNALS.length > 0 && (
-        <SectionContainer>
-          <ScrollReveal>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-fg-primary text-center mb-10">
-              Credentials and Recognition
-            </h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TRUST_SIGNALS.map((signal) => (
-              <Card key={signal.label}>
-                <CardContent>
-                  <h3 className="font-heading text-base font-bold text-fg-primary mb-2">
-                    {signal.label}
-                  </h3>
-                  <p className="text-fg-secondary text-sm">{signal.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </SectionContainer>
-      )}
-
-      {/* Block 7: CTA */}
+      {/* Block 5: CTA */}
       <SectionContainer padding="lg">
         <ScrollReveal>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-fg-primary text-center mb-6">
