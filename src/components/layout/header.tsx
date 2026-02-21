@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, ChevronDown } from 'lucide-react'
@@ -35,10 +36,16 @@ function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-heading text-lg font-bold text-fg-primary tracking-tight"
           aria-label="Blackwell Digital — Home"
         >
-          Blackwell Digital
+          <Image
+            src="/images/logo-white.png"
+            alt="Blackwell Digital"
+            width={180}
+            height={40}
+            className="h-9 md:h-11 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}

@@ -6,7 +6,7 @@ const heroVariants = cva('relative overflow-hidden', {
   variants: {
     variant: {
       homepage:
-        'min-h-svh bg-hero-overlay flex items-center',
+        'min-h-svh bg-bg-base flex items-center',
       interior:
         'min-h-[280px] bg-bg-elevated border-b border-border-subtle',
       quickscan:
@@ -34,10 +34,20 @@ function Hero({
   return (
     <section className={cn(heroVariants({ variant, className }))} {...props}>
       {variant === 'homepage' && (
-        <div
-          className="absolute inset-0 bg-accent-glow pointer-events-none"
-          aria-hidden="true"
-        />
+        <>
+          <div
+            className="absolute inset-0 bg-[url('/images/hero-bg.jpeg')] bg-cover bg-center bg-no-repeat"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 bg-hero-overlay opacity-70 pointer-events-none"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 bg-accent-glow pointer-events-none"
+            aria-hidden="true"
+          />
+        </>
       )}
       <div
         className={cn(
