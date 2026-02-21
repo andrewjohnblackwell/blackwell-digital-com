@@ -2,8 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Linkedin, Twitter } from 'lucide-react'
 import { SITE_CONFIG, FOOTER_NAV, SOCIAL_LINKS } from '@/lib/constants'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { NewsletterForm } from '@/components/newsletter-form'
 
 function Footer() {
   const year = new Date().getFullYear()
@@ -27,19 +26,9 @@ function Footer() {
             <p className="mt-3 text-sm text-fg-tertiary leading-relaxed max-w-xs">
               AI transformation consultancy for growth-stage businesses.
             </p>
-            {/* Newsletter form shell — API in later milestone */}
-            <form className="mt-5 flex gap-2" action="#">
-              <Input
-                inputSize="sm"
-                placeholder="Your email"
-                type="email"
-                aria-label="Email for newsletter"
-                className="flex-1"
-              />
-              <Button variant="primary" size="sm" type="submit">
-                Subscribe
-              </Button>
-            </form>
+            <div className="mt-5">
+              <NewsletterForm />
+            </div>
           </div>
 
           {/* Column 2: Services */}
