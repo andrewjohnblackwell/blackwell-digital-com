@@ -55,11 +55,6 @@ const VALUES = [
   },
 ]
 
-// TODO: Replace with real team data
-const TEAM = [
-  { initials: 'AB', name: '[Name]', title: '[Title]' },
-]
-
 // Populate when credentials/recognition are available
 const TRUST_SIGNALS: { label: string; description: string }[] = []
 
@@ -136,36 +131,7 @@ export default function AboutPage() {
         </div>
       </SectionContainer>
 
-      {/* Block 4: Team */}
-      <SectionContainer>
-        <ScrollReveal>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-fg-primary text-center mb-10">
-            The People Behind the Systems
-          </h2>
-        </ScrollReveal>
-        {/* TODO: Replace placeholder data with real team bios and photos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-          {TEAM.map((member) => (
-            <ScrollReveal key={member.initials}>
-              <Card className="text-center">
-                <CardContent>
-                  <div className="mx-auto mb-4 h-20 w-20 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center">
-                    <span className="font-mono text-xl font-bold text-primary">
-                      {member.initials}
-                    </span>
-                  </div>
-                  <h3 className="font-heading text-base font-bold text-fg-primary">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm text-fg-secondary">{member.title}</p>
-                </CardContent>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
-      </SectionContainer>
-
-      {/* Block 5: Values */}
+      {/* Block 4: Values */}
       <SectionContainer>
         <ScrollReveal>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-fg-primary text-center mb-10">
