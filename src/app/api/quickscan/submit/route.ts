@@ -110,7 +110,7 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ success: true, token })
+    return NextResponse.json({ success: true, token, result })
   } catch {
     return NextResponse.json(
       { success: false, errors: { _form: ['Something went wrong. Please try again.'] } },

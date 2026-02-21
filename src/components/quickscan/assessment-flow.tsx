@@ -32,6 +32,7 @@ function AssessmentFlowInner() {
       }
 
       clearAssessmentStorage()
+      sessionStorage.setItem(`qs-result-${data.token}`, JSON.stringify(data.result))
       router.push(`/quickscan/results/${data.token}`)
     } catch (err) {
       dispatch({
