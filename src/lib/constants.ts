@@ -1,9 +1,9 @@
 export const SITE_CONFIG = {
   name: 'Blackwell Digital',
   description:
-    'AI transformation consultancy helping growth-stage businesses implement AI-driven operations, marketing systems, and growth infrastructure.',
+    'Blackwell Digital helps $1M–$25M businesses implement AI-driven operations, marketing systems, and growth infrastructure. Take the free AI Maturity QuickScan.',
   url: 'https://blackwelldigital.com',
-  ogImage: '/og-default.png',
+  ogImage: 'https://blackwelldigital.com/og-default.jpg',
 } as const
 
 export const NAP = {
