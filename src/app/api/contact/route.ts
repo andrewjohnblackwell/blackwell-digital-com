@@ -3,6 +3,7 @@ import { contactFormSchema } from '@/lib/validations'
 
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY!
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN!
+const MAILGUN_API_URL = process.env.MAILGUN_API_URL || 'https://api.mailgun.net'
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL!
 
 export async function POST(request: Request) {
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
     )
 
     const res = await fetch(
-      `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`,
+      `${MAILGUN_API_URL}/v3/${MAILGUN_DOMAIN}/messages`,
       {
         method: 'POST',
         headers: {
@@ -58,8 +59,8 @@ export async function POST(request: Request) {
     )
 
     if (!res.ok) {
-      const data = await res.json()
-      console.error('[Contact] Mailgun error:', data)
+      const text = await res.text()
+      console.error('[Contact] Mailgun error:', res.status, text)
       return NextResponse.json(
         { success: false, errors: { _form: ['Failed to send message. Please try again.'] } },
         { status: 500 }
@@ -67,7 +68,8 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (err) {
+    console.error('[Contact] Unexpected error:', err)
     return NextResponse.json(
       { success: false, errors: { _form: ['Something went wrong. Please try again.'] } },
       { status: 500 }
