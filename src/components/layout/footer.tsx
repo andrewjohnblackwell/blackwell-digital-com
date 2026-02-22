@@ -1,6 +1,7 @@
 import * as React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Linkedin, Twitter } from 'lucide-react'
+import { Linkedin, Facebook } from 'lucide-react'
 import { SITE_CONFIG, FOOTER_NAV, SOCIAL_LINKS } from '@/lib/constants'
 import { NewsletterForm } from '@/components/newsletter-form'
 
@@ -17,11 +18,14 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Column 1: Brand + Newsletter */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link
-              href="/"
-              className="font-heading text-lg font-bold text-fg-primary tracking-tight"
-            >
-              {SITE_CONFIG.name}
+            <Link href="/" aria-label="Blackwell Digital — Home">
+              <Image
+                src="/images/logo-white.png"
+                alt="Blackwell Digital"
+                width={180}
+                height={40}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="mt-3 text-sm text-fg-tertiary leading-relaxed max-w-xs">
               AI transformation consultancy for growth-stage businesses.
@@ -114,15 +118,15 @@ function Footer() {
                 <Linkedin className="h-5 w-5" />
               </a>
             )}
-            {SOCIAL_LINKS.twitter && (
+            {SOCIAL_LINKS.facebook && (
               <a
-                href={SOCIAL_LINKS.twitter}
+                href={SOCIAL_LINKS.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-fg-tertiary hover:text-fg-secondary transition-colors duration-normal"
-                aria-label="X (Twitter)"
+                aria-label="Facebook"
               >
-                <Twitter className="h-5 w-5" />
+                <Facebook className="h-5 w-5" />
               </a>
             )}
           </div>

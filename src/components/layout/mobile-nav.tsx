@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
@@ -30,12 +31,14 @@ function MobileNav({ open, onClose }: MobileNavProps) {
         >
           {/* Header */}
           <div className="flex h-16 items-center justify-between px-6">
-            <Link
-              href="/"
-              className="font-heading text-lg font-bold text-fg-primary tracking-tight"
-              onClick={onClose}
-            >
-              Blackwell Digital
+            <Link href="/" aria-label="Blackwell Digital — Home" onClick={onClose}>
+              <Image
+                src="/images/logo-white.png"
+                alt="Blackwell Digital"
+                width={180}
+                height={40}
+                className="h-8 w-auto"
+              />
             </Link>
             <DialogPrimitive.Close className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-fg-secondary hover:bg-white/[0.04] transition-colors duration-normal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-hover">
               <X className="h-5 w-5" />

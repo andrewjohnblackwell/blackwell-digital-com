@@ -9,19 +9,20 @@ export const SITE_CONFIG = {
 export const NAP = {
   name: 'Blackwell Digital',
   address: {
-    street: '', // TODO: Add street address
-    city: '', // TODO: Add city
+    street: '3013 S 6th St',
+    city: 'Springfield',
     state: 'IL',
-    zip: '', // TODO: Add zip
+    zip: '62703',
     country: 'US',
   },
-  phone: '', // TODO: Add phone
-  email: '', // TODO: Add email
+  phone: '(314) 873-1603',
+  email: 'contact@blackwelldigital.com',
 } as const
 
 export const SOCIAL_LINKS = {
-  linkedin: '', // TODO: Add LinkedIn URL
-  twitter: '', // TODO: Add X/Twitter URL
+  linkedin: 'https://www.linkedin.com/company/99425941/',
+  facebook: 'https://www.facebook.com/blackwelldigital',
+  twitter: '',
 } as const
 
 export type NavItem = {
