@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from 'next/font/google'
 import { SITE_CONFIG } from '@/lib/constants'
 import { organizationSchema } from '@/lib/schema'
 import { Analytics } from '@/components/analytics'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { CookieConsent } from '@/components/cookie-consent'
 import './globals.css'
 
@@ -117,6 +119,8 @@ export default function RootLayout({
         {children}
         <CookieConsent />
         <Analytics />
+        <VercelAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   )
