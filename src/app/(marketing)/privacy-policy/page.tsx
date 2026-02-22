@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-fg-primary mb-2">
           Privacy Policy
         </h1>
-        <p className="text-sm text-fg-tertiary">Last Updated: February 2025</p>
+        <p className="text-sm text-fg-tertiary">Last Updated: February 2026</p>
       </Hero>
 
       <SectionContainer width="narrow">
