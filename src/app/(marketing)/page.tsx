@@ -8,17 +8,19 @@ import { Badge } from '@/components/ui/badge'
 import { MetricsStrip, type MetricItem } from '@/components/metrics-strip'
 import { createMetadata } from '@/lib/metadata'
 import { ArrowRight } from 'lucide-react'
+import { getPosts, getCaseStudies } from '@/lib/wordpress/api'
+import type { InsightCategory } from '@/types'
 
 export const metadata = createMetadata({
   title: 'AI Transformation for Growth-Stage Businesses',
   description:
-    'Blackwell Digital helps $1M–$25M businesses implement AI-driven operations, marketing systems, and growth infrastructure. Take the free AI Maturity QuickScan.',
+    'Blackwell Digital helps $1M\u2013$25M businesses implement AI-driven operations, marketing systems, and growth infrastructure. Take the free AI Maturity QuickScan.',
   path: '/',
 })
 
 const METRICS: MetricItem[] = [
   { value: 47, suffix: '%', label: 'average reduction in manual processing time' },
-  { value: 3.2, suffix: '×', label: 'marketing pipeline velocity improvement', decimals: 1 },
+  { value: 3.2, suffix: '\u00d7', label: 'marketing pipeline velocity improvement', decimals: 1 },
   { value: 240, prefix: '$', suffix: 'K', label: 'average annual operational savings identified' },
   { value: 90, prefix: '< ', label: 'days to first measurable ROI' },
 ]
@@ -27,19 +29,19 @@ const SERVICE_CARDS = [
   {
     headline: 'Foundation Sprint',
     body: 'A 4-week diagnostic and implementation sprint that maps your current state, identifies high-ROI automation opportunities, and delivers your first working AI workflows.',
-    detail: '4 weeks · Assessment + first implementations',
+    detail: '4 weeks \u00b7 Assessment + first implementations',
     href: '/services/foundation-sprint',
   },
   {
     headline: 'AI Growth System',
-    body: 'A 90-day engagement that builds integrated AI systems across marketing and operations — turning your growth engine from manual to measurable.',
-    detail: '90 days · Integrated marketing + ops systems',
+    body: 'A 90-day engagement that builds integrated AI systems across marketing and operations \u2014 turning your growth engine from manual to measurable.',
+    detail: '90 days \u00b7 Integrated marketing + ops systems',
     href: '/services/ai-growth-system',
   },
   {
     headline: 'AI-First Operating System',
-    body: 'A 6-month transformation that rewires your business infrastructure — operations, marketing, and digital — into a unified AI-driven operating system.',
-    detail: '6 months · Full business transformation',
+    body: 'A 6-month transformation that rewires your business infrastructure \u2014 operations, marketing, and digital \u2014 into a unified AI-driven operating system.',
+    detail: '6 months \u00b7 Full business transformation',
     href: '/services/ai-first-operating-system',
   },
 ]
@@ -51,52 +53,18 @@ const MATURITY_STAGES = [
   { label: 'Autonomous', stage: 4 },
 ]
 
-const CASE_STUDIES = [
-  {
-    labels: ['Distribution', 'Operations'],
-    headline: '52% Reduction in Order Processing Time',
-    body: 'A 40-person distribution company eliminated manual order routing and cut processing time in half within 60 days.',
-    cta: 'Read the Full Story',
-  },
-  {
-    labels: ['Professional Services', 'Marketing'],
-    headline: '3.8× Increase in Qualified Pipeline',
-    body: 'An 18-person consulting firm replaced its manual outreach process with an AI-driven marketing system that tripled qualified inbound leads.',
-    cta: 'Read the Full Story',
-  },
-  {
-    labels: ['Aggregate Results'],
-    headline: 'Average Client Outcomes After 90 Days',
-    body: '47% less manual processing. 3.2× marketing velocity. $240K in identified savings. These are averages — your numbers depend on where you start.',
-    cta: 'See All Results',
-  },
-]
+const CATEGORY_LABEL_MAP: Record<InsightCategory, string> = {
+  'ai-maturity': 'AI Maturity',
+  operations: 'Operations',
+  marketing: 'Marketing',
+  'digital-transformation': 'Digital Transformation',
+}
 
-const BLOG_POSTS = [
-  {
-    category: 'AI Maturity',
-    title: 'What Is AI Maturity — And Why Should a $5M Business Care?',
-    excerpt:
-      'Most SMBs don\'t have an AI problem. They have a systems problem that AI can solve — if you know where to start.',
-    readTime: '7 min read',
-  },
-  {
-    category: 'Operations',
-    title: 'The 5 Workflows Every Growing Business Should Automate First',
-    excerpt:
-      'Not all automation is equal. These five workflows deliver the fastest payback for companies under $25M.',
-    readTime: '5 min read',
-  },
-  {
-    category: 'Digital Transformation',
-    title: 'Why Your Website Is a Liability (Not an Asset)',
-    excerpt:
-      'If your website can\'t qualify leads, answer questions, and drive bookings without your sales team, it\'s costing you money.',
-    readTime: '6 min read',
-  },
-]
+export default async function HomePage() {
+  const [allPosts, allCaseStudies] = await Promise.all([getPosts(), getCaseStudies()])
+  const featuredPosts = allPosts.slice(0, 3)
+  const featuredStudies = allCaseStudies.slice(0, 3)
 
-export default function HomePage() {
   return (
     <>
       {/* Block 1: Hero */}
@@ -262,10 +230,10 @@ export default function HomePage() {
             </p>
             <ul className="space-y-3 max-w-xl mx-auto mb-8">
               {[
-                'Your overall AI maturity stage (1–4)',
+                'Your overall AI maturity stage (1\u20134)',
                 'Dimension-level scores showing where you\'re strong and where you\'re exposed',
                 'Personalized recommendations mapped to your specific gaps',
-                'A clear next step — whether that\'s a strategy call or a resource to dig deeper',
+                'A clear next step \u2014 whether that\'s a strategy call or a resource to dig deeper',
               ].map((item) => (
                 <li
                   key={item}
@@ -300,33 +268,42 @@ export default function HomePage() {
           </h2>
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {CASE_STUDIES.map((study, i) => (
-            <ScrollReveal key={study.headline} delay={i * 0.1}>
-              <Card className="h-full flex flex-col">
-                <CardContent className="flex-1">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {study.labels.map((label) => (
-                      <Badge key={label} variant="primary" size="sm">
-                        {label}
+          {featuredStudies.map((study, i) => {
+            const hasContent = !!study.challenge || !!study.content
+            return (
+              <ScrollReveal key={study.slug} delay={i * 0.1}>
+                <Card className="h-full flex flex-col">
+                  <CardContent className="flex-1">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <Badge variant="primary" size="sm">
+                        {study.industry}
                       </Badge>
-                    ))}
-                  </div>
-                  <h3 className="font-heading text-lg font-bold text-fg-primary mb-3">
-                    {study.headline}
-                  </h3>
-                  <p className="text-fg-secondary text-sm leading-relaxed">{study.body}</p>
-                </CardContent>
-                <CardFooter>
-                  <Link
-                    href="/results"
-                    className="text-sm font-medium text-primary hover:text-primary-hover transition-colors inline-flex items-center gap-1"
-                  >
-                    {study.cta} <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </CardFooter>
-              </Card>
-            </ScrollReveal>
-          ))}
+                    </div>
+                    <h3 className="font-heading text-lg font-bold text-fg-primary mb-3">
+                      {study.headlineResult}
+                    </h3>
+                    <p className="text-fg-secondary text-sm leading-relaxed">
+                      {study.metrics[0] && (
+                        <>
+                          <span className="font-semibold text-primary">{study.metrics[0].value}</span>{' '}
+                          {study.metrics[0].label.toLowerCase()}
+                        </>
+                      )}
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    <Link
+                      href={hasContent ? `/results/${study.slug}` : '/results'}
+                      className="text-sm font-medium text-primary hover:text-primary-hover transition-colors inline-flex items-center gap-1"
+                    >
+                      {hasContent ? 'Read the Full Story' : 'See All Results'}{' '}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </CardFooter>
+                </Card>
+              </ScrollReveal>
+            )
+          })}
         </div>
       </SectionContainer>
 
@@ -338,32 +315,36 @@ export default function HomePage() {
           </h2>
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {BLOG_POSTS.map((post, i) => (
-            <ScrollReveal key={post.title} delay={i * 0.1}>
-              <Card className="h-full flex flex-col">
-                <CardContent className="flex-1">
-                  <Badge variant="default" size="sm" className="mb-4">
-                    {post.category}
-                  </Badge>
-                  <h3 className="font-heading text-lg font-bold text-fg-primary mb-3">
-                    {post.title}
-                  </h3>
-                  <p className="text-fg-secondary text-sm leading-relaxed mb-3">
-                    {post.excerpt}
-                  </p>
-                  <p className="text-xs text-fg-tertiary">{post.readTime}</p>
-                </CardContent>
-                <CardFooter>
-                  <Link
-                    href="/insights"
-                    className="text-sm font-medium text-primary hover:text-primary-hover transition-colors inline-flex items-center gap-1"
-                  >
-                    Read Article <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </CardFooter>
-              </Card>
-            </ScrollReveal>
-          ))}
+          {featuredPosts.map((post, i) => {
+            const hasContent = !!post.content
+            return (
+              <ScrollReveal key={post.slug} delay={i * 0.1}>
+                <Card className="h-full flex flex-col">
+                  <CardContent className="flex-1">
+                    <Badge variant="default" size="sm" className="mb-4">
+                      {CATEGORY_LABEL_MAP[post.category]}
+                    </Badge>
+                    <h3 className="font-heading text-lg font-bold text-fg-primary mb-3">
+                      {post.title}
+                    </h3>
+                    <p className="text-fg-secondary text-sm leading-relaxed mb-3">
+                      {post.excerpt}
+                    </p>
+                    <p className="text-xs text-fg-tertiary">{post.readTime}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Link
+                      href={hasContent ? `/insights/${post.slug}` : '/insights'}
+                      className="text-sm font-medium text-primary hover:text-primary-hover transition-colors inline-flex items-center gap-1"
+                    >
+                      {hasContent ? 'Read Article' : 'Read Article'}{' '}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </CardFooter>
+                </Card>
+              </ScrollReveal>
+            )
+          })}
         </div>
       </SectionContainer>
 
